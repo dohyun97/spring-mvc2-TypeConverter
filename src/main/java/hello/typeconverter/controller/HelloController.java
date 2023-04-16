@@ -1,5 +1,6 @@
-package hello.typeconverter;
+package hello.typeconverter.controller;
 
+import hello.typeconverter.type.IpPort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-public class HelloConverter {
+public class HelloController {
 
     @GetMapping("/hello-v1")
     public String helloV1(HttpServletRequest request){
@@ -18,8 +19,18 @@ public class HelloConverter {
     }
 
     @GetMapping("/hello-v2")
-    public String helloV2(@RequestParam int data) {
-        System.out.println("data = " + data);
+    public String helloV2(@RequestParam int data){
+
+        System.out.println("data = "+data);
+        return "ok";
+    }
+
+    @GetMapping("/ip-port")
+    public String ipPort(@RequestParam IpPort ipPort){
+        int port = ipPort.getPort();
+        String ip = ipPort.getIp();
+        System.out.println("ip = " + ip);
+        System.out.println("port = " + port);
         return "ok";
     }
 }
